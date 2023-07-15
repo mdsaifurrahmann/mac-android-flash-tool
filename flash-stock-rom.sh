@@ -103,14 +103,20 @@ case $flasher in
 
         if grep -q "$replace" "$file1"; then
             awk -v search="$replace" -v replace="$look" '{ gsub(search, replace); print }' "$file1" > flash_all.txt && mv flash_all.txt "$file1"
+
+            awk -v search="/stock-rom/images/" -v replace="/images/" '{ gsub(search, replace); print }' "$file1" > flash_all.txt && mv flash_all.txt "$file1"
         fi
 
         if grep -q "$replace" "$file2"; then
             awk -v search="$replace" -v replace="$look" '{ gsub(search, replace); print }' "$file2" > flash_all.txt && mv flash_all.txt "$file2"
+
+            awk -v search="/stock-rom/images/" -v replace="/images/" '{ gsub(search, replace); print }' "$file2" > flash_all.txt && mv flash_all.txt "$file2"
         fi
 
         if grep -q "$replace" "$file3"; then
             awk -v search="$replace" -v replace="$look" '{ gsub(search, replace); print }' "$file3" > flash_all.txt && mv flash_all.txt "$file3"
+
+            awk -v search="/stock-rom/images/" -v replace="/images/" '{ gsub(search, replace); print }' "$file3" > flash_all.txt && mv flash_all.txt "$file3"
         fi
 
         echo -e "\033[0;32m Modified Flash file restored! \033[0m"
