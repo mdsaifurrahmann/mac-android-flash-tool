@@ -11,7 +11,7 @@ echo -e "\033[0;32m Succeed! CHMOD EXECUTED!
     \033[0m"
 
 look="fastboot"
-replace="./platform-tools/fastboot"
+replace="./stock-rom/fastboot"
 
 # Perform search and replace using awk
 if [ ! -f $file1 ]; then
@@ -41,10 +41,16 @@ if ! grep -q "$replace" "$file3"; then
     awk '{ gsub(/'"$look"'/, "'"$replace"'"); print }' "$file3" > flash_all_except_data_storage.txt && mv flash_all_except_data_storage.txt "$file3"
 fi
 
+awk -v search="/images/" -v replace="/stock-rom/images/" '{ gsub(search, replace); print }' "$file1" > flash_all.txt && mv flash_all.txt "$file1"
+
 if [ $? -eq 0 ]; then
     echo -e "\033[0;32m Modifying Flash file Succeed!
     \033[0m"
 fi
+
+cp -R "./platform-tools"/* "./stock-rom/"
+echo -e "\033[0;32m Copying files completed
+    \033[0m"
 
 echo -e "\033[0;33m What do you want to do?
 1. Flash without lock bootloader

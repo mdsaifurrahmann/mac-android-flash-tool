@@ -53,9 +53,11 @@ case $flasher in
     echo -e "\033[0;32m Rebooting to System \033[0m";
     ./platform-tools/fastboot reboot
 
-    if [$? -eq 0]; then
+    if [ $? -eq 0 ]; then
       echo -e "\033[0;32m Operation Succeed \033[0m";
     fi
+
+    source ./flash.sh
   ;;
   "2")
     if [ ! -f "vbmeta.img" ]; then
@@ -74,9 +76,11 @@ case $flasher in
     echo -e "\033[0;32m Rebooting your device to system! Have a good day! \033[0m";
     ./platform-tools/fastboot reboot
 
-    if [$? -eq 0]; then
+    if [ $? -eq 0 ]; then
       echo -e "\033[0;32m Operation Succeed \033[0m";
     fi
+
+    source ./flash.sh
 
   ;;
   "3")
@@ -99,19 +103,27 @@ case $flasher in
     if [ $? -eq 0 ]; then
       echo -e "\033[0;32m sideload operation completed \033[0m";
     fi
+
+    source ./flash.sh
     
   ;;
   "4")
     echo -e "\033[0;32m adb device list: \033[0m"
     ./platform-tools/adb devices
+
+    source ./flash.sh
   ;;
   "5")
     echo -e "\033[0;32m fastboot device list: \033[0m"
     ./platform-tools/fastboot devices
+
+    source ./flash.sh
   ;;
   "6")
     echo -e "\033[0;32m Rebooting your device to system! Have a good day! \033[0m";
     ./platform-tools/fastboot reboot
+
+    source ./flash.sh
   ;;
   "7")
     echo -e "\033[0;32m Great Choice! Heading up to Stock ROM Flash system! \033[0m";
