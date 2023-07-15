@@ -96,6 +96,8 @@ case $flasher in
         fi
 
         echo -e "\033[0;32m Modified Flash file restored! \033[0m"
+
+        source ./flash.sh
     ;;
     *)
         echo "Aborting..."
@@ -121,6 +123,6 @@ case $flasher in
 
         echo -e "\033[0;32m Modified Flash file restored! \033[0m"
 
-        exit 1;
+        source ./flash.sh
     ;;
 esac

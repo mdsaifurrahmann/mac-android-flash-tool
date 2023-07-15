@@ -9,7 +9,7 @@ What do you want to do?
 4. Check adb devices
 5. Check fastboot devices
 6. Reboot to System
-7. Flash MIUI Stock ROM
+7. Flash MIUI Stock ROM (Fastboot)
 (Press Any key to Exit or input your choice.)
 \033[0m";
 
