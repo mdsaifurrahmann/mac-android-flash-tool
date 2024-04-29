@@ -2,7 +2,7 @@
 trap "echo -e '\033[0;31m Script execution aborted. \033[0m'; exit 1" INT
 file1="./stock-rom/flash_all.sh"
 file2="./stock-rom/flash_all_lock.sh"
-file3="./stock-rom/flash_all_except_data_storage.sh"
+file3="./stock-rom/flash_all_except_*.sh"
 
 sudo chmod +x $file1 $file2 $file3
 sudo -k
@@ -26,7 +26,7 @@ fi
 
 if [ ! -f $file3 ]; then
     echo -e "\033[0;31m $file3 file is not found \033[0m";
-    exit 1;    
+    exit 1;
 fi
 
 
