@@ -6,10 +6,14 @@ What do you want to do?
 1. Flash Recovery
 2. Flash VBMETA
 3. Use adb Sideload
-4. Check adb devices
-5. Check fastboot devices
-6. Reboot to System
-7. Flash MIUI Stock ROM (Fastboot)
+4. Use adb Sideload and Reboot to recovery
+5. Check adb devices
+6. Check fastboot devices
+7. Reboot to System
+8. Reboot to Recovery
+9. Reboot to Bootloader
+10. Reboot to Fastboot
+11. Flash MIUI Stock ROM (Fastboot)
 (Press Any key to Exit or input your choice.)
 \033[0m";
 
@@ -108,24 +112,67 @@ case $flasher in
     
   ;;
   "4")
+
+    echo -e "\033[0;32m Please enter the file name of your custom rom. \033[0m";
+    read -p "Enter the zip file name: " romname
+
+    if [ ! -f "$romname" ]; then
+        echo -e "\033[0;31m > $romname file is not found \033[0m";
+        echo -e "\033[0;31m \033[3m Please ensure that '$romname' file exist and try again. Have a good day! \033[0m";
+        exit 1;
+    fi
+    if [ ! -f "./platform-tools/adb" ]; then
+        echo -e "\033[0;31m > adb file is not found \033[0m";
+        echo -e "\033[0;31m \033[3m Please ensure that 'adb' file exist and try again. Have a good day! \033[0m";
+        exit 1;
+    fi
+    ./platform-tools/adb sideload $romname
+
+    if [ $? -eq 0 ]; then
+      echo -e "\033[0;32m Sideload operation completed. Rebooting to Recovery \033[0m";
+      ./platform-tools/adb reboot recovery
+    fi
+
+    source ./flash.sh
+    
+  ;;
+  "5")
     echo -e "\033[0;32m adb device list: \033[0m"
     ./platform-tools/adb devices
 
     source ./flash.sh
   ;;
-  "5")
+  "6")
     echo -e "\033[0;32m fastboot device list: \033[0m"
     ./platform-tools/fastboot devices
 
     source ./flash.sh
   ;;
-  "6")
+  "7")
     echo -e "\033[0;32m Rebooting your device to system! Have a good day! \033[0m";
     ./platform-tools/fastboot reboot
 
     source ./flash.sh
   ;;
-  "7")
+  "8")
+    echo -e "\033[0;32m Rebooting your device to Recovery! \033[0m";
+    ./platform-tools/fastboot reboot recovery
+
+    source ./flash.sh
+  ;;
+  "9")
+    echo -e "\033[0;32m Rebooting your device to Bootloader! \033[0m";
+    ./platform-tools/fastboot reboot bootloader
+
+    source ./flash.sh
+  ;;
+  "10")
+    echo -e "\033[0;32m Rebooting your device to Fastboot! \033[0m";
+    ./platform-tools/fastboot reboot fastboot
+
+    source ./flash.sh
+  ;;
+  "11")
     echo -e "\033[0;32m Great Choice! Heading up to Stock ROM Flash system! \033[0m";
     source ./flash-stock-rom.sh;
   ;;
