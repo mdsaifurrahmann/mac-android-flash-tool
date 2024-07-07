@@ -54,8 +54,8 @@ case $flasher in
       echo -e "\033[0;32m Skipping Flashing vbmeta.img \033[0m";
     fi
 
-    echo -e "\033[0;32m Rebooting to System \033[0m";
-    ./platform-tools/fastboot reboot
+    echo -e "\033[0;32m Rebooting to Recovery \033[0m";
+    ./platform-tools/fastboot reboot recovery
 
     if [ $? -eq 0 ]; then
       echo -e "\033[0;32m Operation Succeed \033[0m";
