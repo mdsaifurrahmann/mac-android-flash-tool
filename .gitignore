@@ -2,3 +2,4 @@
 /*.img
 /stock-rom/*
 !/stock-rom/extract your rom files here.txt
+.DS_Store
